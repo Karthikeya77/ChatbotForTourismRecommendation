@@ -1,0 +1,56 @@
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+		<title>Login/Register</title>
+	</head>
+	
+	<body>
+		<nav>
+			<div class="title"><p>Chatbot for Tourism Services</p></div>
+		</nav>
+
+		<div class="login"><img src="{{url_for('static', filename='login.jpg')}}" ></div>
+		
+		<div class="form-box">
+			<div class="button-box">
+				<div id="btn"></div>
+				<button type="button" class="both-btn" onclick="signin()">Signin</button>
+				<button type="button" class="both-btn" onclick="signup()">Signup</button>
+			</div>
+			
+			<form id="login" class="input-group">
+				<center><small><span id="error1" style="color: red"></span></small></center>
+
+				<input id="emaill" type="email" class="input-field" placeholder="Email id" required>
+				<input id="passwordl" type="password" class="input-field" placeholder="Password" required>&emsp;
+				<input type="checkbox" onclick="myFunction()">Show Password
+				<button onclick="Login()" type="submit" class="submit-button">Log in</button>
+				<a href="#" onclick="forgotPass()">Forgot Password</a>
+
+			</form>
+			<form id="register" class="input-group">
+				<center><small><span id="error2" style="color: red"></span></small></center>
+
+				<input id="name" type="text" class="input-field" placeholder="Name" required>
+				<input id="emailr" type="email" class="input-field" placeholder="Email id" required>
+				<input id="passwordr" type="password" class="input-field" placeholder="Password" required> 
+				<input id="confirmpassword" type="text" class="input-field" placeholder="Confirm Password" required>&emsp;
+				<button onclick="Register()" type="submit" class="submit-button">Register</button>
+			</form>
+		</div>
+		
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use  https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+		
+
+        <script src="{{url_for('static', filename='firebase.js')}}"></script>
+		<script src="{{url_for('static', filename='index.js')}}"></script>			
+	</body>
+	
+</html>

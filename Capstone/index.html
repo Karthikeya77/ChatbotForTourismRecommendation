@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tourism Welcomes You</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='style2.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+.container {
+  width: 500px;
+  clear: both;
+}
+
+.container input {
+  width: 60%;
+  clear: both;
+}
+</style>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        </i> Chatbot for Tourism Services</i>
+      </div>
+	  <a class="back" href="Homepage.html">Back</a>
+    </header>
+
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        <div class="msg-img" style="background-image: url({{ url_for('static',filename='robot.png') }})"></div>
+
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">Capstone-Bot</div>
+            <div class="msg-info-time"></div>
+          </div>
+
+          <div class="msg-text">
+            Hi! Welcome to Tourism Recommendation System,I am here to help you. 😄
+          </div>
+          <div class="msg-text">
+            you can ask me anything related to Tourism in South India ,I will try my best to answer
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+      <i class="fa fa-microphone" style="font-size:48px;color:rgb(45, 73, 230);background-color: rgb(27, 240, 158);border-radius: 50%;" onclick="record()" value="Play"></i>
+      <button type="submit" class="msger-send-btn">Send</button>
+    </form>
+  </section>
+  <!-- partial -->
+  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+  <script>
+   
+   function record() {
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-GB";
+
+            recognition.onresult = function(event) {
+                // console.log(event);
+                document.getElementById('textInput').value = event.results[0][0].transcript;
+            }
+            recognition.start();
+            event.preventDefault();
+
+            recognition.addEventListener("end", event => {
+      event.preventDefault();
+
+      const msgText = document.getElementById('textInput').value;
+      if (!msgText) return;
+
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+      botResponse(msgText);
+      document.getElementById('textInput').value='';
+    });
+
+        }
+  
+   var id1="1";
+  var id2="2";
+  var id3="3";
+  var idm1="4";
+  var idm2="5";
+  var y="";
+    var msgerForm = get(".msger-inputarea");
+    var msgerInput = get(".msger-input");
+    var msgerChat = get(".msger-chat");
+
+
+    // Icons made by Freepik from www.flaticon.com
+    
+    const BOT_IMG = "{{ url_for('static',filename='robot.png') }}";
+    const PERSON_IMG = "{{ url_for('static',filename='profile.png') }}";
+    const BOT_NAME = "Capstone-Bot";
+    const PERSON_NAME = localStorage.getItem('name1');
+
+    msgerForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      var msgText = msgerInput.value;
+      if (!msgText) return;
+
+      
+      msgerInput.value = "";
+      if(msgText=="recommend")
+      {appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+      botResponse(msgText);
+      }
+      else
+      {t=msgText
+        msgText=msgText+"Not"
+        appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+        botResponse(t);
+
+
+      }
+    });
+    function fuv(a) {
+     alert("a")
+    
+     
+     
+     
+     
+}
+
+function method3() {  
+  var markedCheckbox = document.getElementsByName('pl'); 
+  
+  z=y.split("@")
+  
+  var res12=""
+ 
+  
+  for (var checkbox of markedCheckbox) {  
+    if (checkbox.checked) 
+    { 
+      var x=checkbox.value
+      
+      for(let i=0;i<(z.length-1);i++)
+      {
+        
+        if(z[i].includes(x))
+        {
+          res12=res12+z[i]+"@"
+          break;
+        }
+      }
+      
+      
+    }
+}  
+
+
+botResponse4(res12)
+
+}
+    function method1(id1,id2,id3)
+     {     
+         
+      var st=document.getElementById(id1).value;
+           var dat=document.getElementById(id2).value;
+           window['dat1']=st
+           var day=document.getElementById(id3).value; 
+           
+         
+           var res=st+" "+dat+" "+day;
+           id1 = id1+"1";
+           
+           window['id2'] = id2+"2";
+           window['id3'] = id1+"3";
+           botResponse1(res);
+     }
+     function method2(idm1,idm2)
+     {     
+         
+      var st=document.getElementById(idm1).value;
+		window['dat1']=st
+     
+           var dat=document.getElementById(idm2).value;
+           var res=st+" "+dat;
+           window['idm1'] = idm1+"1";
+           
+           window['idm2'] = idm2+"2";  
+           botResponse3(res);
+     }
+                
+
+    function appendMessage(name, img, side, text) {
+      
+
+      //alert(text)
+      var stri=text
+      var str12="HT"
+       var hotel=[]
+       var path1="PT"
+       var err="CityErr"
+	   var err1="DayINV"
+       var answ="Res"
+       var side=side
+       var img=img
+       var p2="p2"
+       var n="Not"
+     
+     if(text=="recommend" && name==BOT_NAME)
+      {     left="left"
+            text="Choose One of the Two options"
+            
+            var msgHTML = `
+	<div class="msg ${side}-msg">
+  	<div class="msg-img" style="background-image: url(${img})"></div>
+
+  	<div class="msg-bubble">
+    	<div class="msg-info">
+      
+      	<div class="msg-info-name">${name}</div>
+      	<div class="msg-info-time">${formatDate(new Date())}</div>
+      
+    	</div>
+    
+
+    	<div class="msg-text" >${text}</div><br>
+    
+    	<div id="hide-div">
+   	<input type="Button" id="but" onclick="setLocation()" value="1.User Suggest Places"></input>&emsp;
+     <input type="Button" id="but" onclick="setmethod2()" value="2.Chatbot Suggest Places"></input>
+
+
+   
+   	</div>
+  	</div>
+	</div>
+    
+    
+    
+    
+  	</div>
+	</div>
+	`;
+
+
+      	msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      	msgerChat.scrollTop += 500;
+         }  
+     else if(text=="recommend" && name==PERSON_NAME)
+     {
+      var msgHTML = `
+	<div class="msg ${side}-msg">
+  	<div class="msg-img" style="background-image: url(${img})"></div>
+
+  	<div class="msg-bubble">
+    	<div class="msg-info">
+      
+      	<div class="msg-info-name">${name}</div>
+      	<div class="msg-info-time">${formatDate(new Date())}</div>
+      
+    	</div>
+    
+
+    	<div class="msg-text" >${text}</div>
+      
+      
+    </div>
+    </div>
+    </div>
+    </div>
+  	
+	`;
+  
+
+
+      	msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      	msgerChat.scrollTop += 500;
+     }
+if(typeof stri=="string"  && stri.includes(err) && name==BOT_NAME)
+     {
+      var msgHTML = `
+<div id="user1">
+<div class="msg left-msg">
+  
+  <div class="msg-bubble">
+    <div class="msg-info">
+      
+      
+      <div style="color:Red">Invalid City!Please Enter Valid City and Send again</div>
+      
+      
+    </div>
+    
+
+
+  </div>
+</div>
+</div>
+ 
+`
+;
+
+    
+
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+      
+
+     }
+     if(typeof stri=="string"  && stri.includes(err1) && name==BOT_NAME)
+     {
+      var msgHTML = `
+<div id="user1">
+<div class="msg left-msg">
+  
+  <div class="msg-bubble">
+    <div class="msg-info">
+      
+      
+      <div style="color:Red">Invalid No of Days!Please Enter Valid No of Days and Send again</div>
+      
+      
+    </div>
+    
+
+
+  </div>
+</div>
+</div>
+ 
+`
+;
+
+    
+
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+      
+
+     }
+
+     if(text==2 &&  name==BOT_NAME)
+       {
+            
+        var msgHTML = `<div class="msg ${side}-msg">
+<div class="msg-img" style="background-image: url(${img})"></div>
+<div class="msg-bubble">
+  <div class="msg-info">
+  
+    <div class="msg-info-name">${name}</div>
+    <div class="msg-info-time">${formatDate(new Date())}</div>
+  
+  </div>
+
+    <div class="container">
+      
+<form>
+  <label>Start Date:</label><br>
+  <input type="Date" id=${id1}><br>
+  <label><br/>City you want to travel:</label><br>
+  <input type="text" id=${id2}><br>
+  <label><br/>No of Days you want to stay in city:</label><br>
+  <input type="text"  id=${id3}><br><br>
+  <button type="Button" id="but" onclick="method1(${id1},${id2},${id3})">Send</button>
+</form>
+    </div>
+
+</div>
+</div>
+`;
+
+  id1=id1+"1"
+ 
+  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  msgerChat.scrollTop += 500;
+  
+
+  
+
+    }
+    else if(text==2 && name==PERSON_NAME)
+      {
+          
+           var msgHTML = `
+<div id="user2">
+<div class="msg ${side}-msg">
+  
+  <div class="msg-bubble">
+    <div class="msg-info">
+      
+      
+      <div>Chatbot Suggest Places</div>
+      
+      
+    </div>
+    
+
+
+  </div>
+</div>
+</div>
+ 
+`
+;
+
+      name=BOT_NAME
+
+      
+ side="left"
+ img=BOT_IMG
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+      appendMessage(BOT_NAME, BOT_IMG, "left", 2);
+
+         
+      }
+      if(text==1 &&  name==BOT_NAME)
+       {
+            
+        var msgHTML = `<div class="msg ${side}-msg">
+<div class="msg-img" style="background-image: url(${img})"></div>
+<div class="msg-bubble">
+  <div class="msg-info">
+  
+    <div class="msg-info-name">${name}</div>
+    <div class="msg-info-time">${formatDate(new Date())}</div>
+    
+  
+  </div>
+
+    <div class="container">
+      
+<form>
+  <label>Start Date:</label><br><br>
+  <input type="Date" id=${idm1}><br><br>
+  <label><br/>City you want to travel:</label><br><br>
+  <input type="text" id=${idm2}><br><br>
+  <button type="Button" id="but" onclick="method2(${idm1},${idm2})">Send</button>
+  
+ 
+</form>
+    </div>
+
+</div>
+</div>
+`;
+
+ 
+ 
+  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  msgerChat.scrollTop += 500;
+  
+
+  
+
+    }
+      else if(text==1 && name==PERSON_NAME)
+      {
+          
+           var msgHTML = `
+<div id="user1">
+<div class="msg ${side}-msg">
+  
+  <div class="msg-bubble">
+    <div class="msg-info">
+      
+      
+      <div>User Suggest Places</div>
+      
+      
+    </div>
+    
+
+
+  </div>
+</div>
+</div>
+ 
+`
+;
+
+      name=BOT_NAME
+
+      
+ side="left"
+ img=BOT_IMG
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+      appendMessage(BOT_NAME, BOT_IMG, "left", 1);
+
+         
+      }
+      if(typeof stri=="string"  && stri.includes(p2) && name==BOT_NAME)
+      {  var text=``    
+        var l=stri.length
+        var a=l-1
+        
+        let final_string = replaceAtIndex(stri, a, "" )
+        var idp="0"+id1
+
+        var myArr = final_string.split("@");
+        for(let j=0;j<(myArr.length)-1;j++)
+        {
+          myArr[j]=myArr[j].trim()
+        }
+        console.log(myArr)
+        for(let i=0;i<(myArr.length)-1;i++)
+        { x=myArr[i]
+          
+          text=text+`${myArr[i]}: <input type="checkbox" id="check${i}" name="pl" value=${myArr[i]}><br> `
+          
+
+        }
+        y=final_string
+      
+        text=text+`<br> <br><button id=${idp} class="subb" onclick="method3()">Submit</button> <br>`
+        
+        
+            var msgHTML = `
+	<div class="msg ${side}-msg">
+  	<div class="msg-img" style="background-image: url(${img})"></div>
+
+  	<div class="msg-bubble">
+    	<div class="msg-info">
+      
+      	<div class="msg-info-name">${name}</div>
+      	<div class="msg-info-time">${formatDate(new Date())}</div>
+      
+    	</div>
+     
+    
+
+    	<div class="msg-text" >${text}</div>
+    
+  	</div>
+	</div>
+    
+    
+    
+    
+  	</div>
+	</div>
+	`;
+
+
+      	msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      	msgerChat.scrollTop += 500;
+         }
+     
+    
+      
+
+      
+        
+    
+        
+      
+ 
+        if (typeof stri=="string"  && stri.includes(str12) && name==BOT_NAME) 
+{
+     var myarr=stri.split("HT")
+
+  
+  
+  var msgHTML = `
+<div class="msg ${side}-msg">
+  
+  <div class="msg-bubble">
+    <div>Choose One hotel Out of  five Hotels</div><br><br>
+    <div class="hide-onet">
+    <input type="Button" id="but" onclick="setLocation1(\'${myarr[0]}\')" value="${myarr[0]}"></input><br><br>
+    <input type="Button" id="but" onclick="setLocation1(\'${myarr[1]}\')" value="${myarr[1]}"></input><br><br>
+    <input type="Button" id="but" onclick="setLocation1(\'${myarr[2]}\')" value="${myarr[2]}"></input><br><br>
+    <input type="Button" id="but" onclick="setLocation1(\'${myarr[3]}\')" value="${myarr[3]}"></input><br><br>
+    <input type="Button" id="but" onclick="setLocation1(\'${myarr[4]}\')" value="${myarr[4]}"></input><br><br>
+    
+    </div>
+  
+  </div>
+</div>
+ 
+`
+;
+
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+	
+        } 
+        else if(typeof stri=="string"  && stri.includes(str12) && name==PERSON_NAME) {
+  
+  const msgHTML = `
+<div class="msg ${side}-msg">
+ 
+ <div class="msg-bubble">
+   <div>${text}</div>
+   
+   
+ 
+ </div>
+</div>
+
+`
+;
+
+     msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+     msgerChat.scrollTop += 500;
+     console.log(text)
+     
+     botResponse2(text)
+}
+    
+     
+     
+  
+
+if(typeof stri=="string"  && stri.includes(answ) && name==BOT_NAME)
+      {  if(stri.includes("No"))
+          {
+            var t=stri.replace("NoRes","");
+          }  
+        else
+        {
+          var t=stri.replace("Res","");
+        }
+            var msgHTML = `
+	<div class="msg ${side}-msg">
+  	<div class="msg-img" style="background-image: url(${img})"></div>
+
+  	<div class="msg-bubble">
+    	<div class="msg-info">
+      
+      	<div class="msg-info-name">${name}</div>
+      	<div class="msg-info-time">${formatDate(new Date())}</div>
+      
+    	</div>
+    
+
+    	<div class="msg-text" >${t}</div>
+    
+  	</div>
+	</div>
+    
+    
+    
+    
+  	</div>
+	</div>
+	`;
+
+
+      	msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      	msgerChat.scrollTop += 500;
+         }
+         
+        
+         if(typeof stri=="string"  && stri.includes(path1) && name==BOT_NAME)
+      {  var text=``  
+      var stri=stri.replace("$PT","");
+      
+
+      // console.log(stri)
+        var myarr=stri.split("$")
+		var l1=dat1.split("-")
+       
+
+    
+        var t2=l1[2]
+        l1[2]=l1[0]
+        l1[0]=t2
+        
+        i=1
+		let path2=""
+        var j=0;
+        for (let x of myarr){
+          k="Recommended Path For Day"+i.toString()+" "+'('+l1[0]+'-'+l1[1]+'-'+l1[2]+')'
+          if (l1[1] == 1 || 3 || 5 || 7 || 8 || 10 || 12){
+              if (parseInt(l1[0])==31){
+                l1[0]="1"
+                l1[1]=(parseInt(l1[1])+1).toString()}
+              else {
+                l1[0] = (parseInt(l1[0])+1).toString()
+
+              }
+              }
+              else if(l1[1] == 4 || 6 || 9 || 11){
+                if (parseInt(l1[0])==30){
+                l1[0]="1"
+                l1[1]=(parseInt(l1[1])+1).toString()
+              }
+              else {
+                l1[0] = (parseInt(l1[0])+1).toString()
+
+              }
+              }
+              else {
+                if (parseInt(l1[0])==28){
+                l1[0]="1"
+                l1[1]=(parseInt(l1[1])+1).toString()
+              }
+              else{
+                l1[0] = (parseInt(l1[0])+1).toString()
+
+              }
+              
+          }
+  text=text+`<div style="color:green">${k}</div>`; 
+  var myarr1=x.split("@")
+  for(let y of myarr1 )
+  {
+    text=text+`${y}`+`<br>`; 
+  }
+  i=i+1
+}
+path2=path2+text
+sessionStorage.setItem("path", path2);
+
+            var msgHTML = `
+	<div class="msg ${side}-msg">
+  	<div class="msg-img" style="background-image: url(${img})"></div>
+
+  	<div class="msg-bubble">
+    	<div class="msg-info">
+      
+      	<div class="msg-info-name">${name}</div>
+      	<div class="msg-info-time">${formatDate(new Date())}</div>
+      
+    	</div>
+    
+
+    	<div class="msg-text" >${text}</div>
+      <input type="Button" id="but" onclick="b1()" value="Send path to Mail"></input>
+      
+    </div>
+    </div>
+    </div>
+    </div>
+  	
+	`;
+  
+    // document.getElementById('sendtomail').addEventListener("click",mailtouser);
+
+
+      	msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      	msgerChat.scrollTop += 500;
+         }
+         if(typeof stri=="string" && stri.includes(n) &&  name==PERSON_NAME)
+         {
+           var t=stri.replace("Not","");
+          var msgHTML = `
+	<div class="msg ${side}-msg">
+  	<div class="msg-img" style="background-image: url(${img})"></div>
+
+  	<div class="msg-bubble">
+    	<div class="msg-info">
+      
+      	<div class="msg-info-name">${name}</div>
+      	<div class="msg-info-time">${formatDate(new Date())}</div>
+      
+    	</div>
+    
+
+    	<div class="msg-text" >${t}</div>
+      
+      
+    </div>
+    </div>
+    </div>
+    </div>
+  	
+	`;
+  
+
+
+      	msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      	msgerChat.scrollTop += 500;
+         }
+        
+        }
+
+
+     
+
+        
+        function replaceAtIndex(_string,_index,_newValue) {
+    if(_index > _string.length-1) 
+    {
+        return string
+    }
+    else{
+    return _string.substring(0,_index) + _newValue + _string.substring(_index+1)
+    }
+
+}
+
+  
+function b1(){
+      let email7 = localStorage.getItem('email1')
+      let message7 = sessionStorage.getItem("path")
+      sendEmail(email7,message7)
+    }
+
+    function sendEmail(email,message){
+      Email.send({
+        Host : "smtp.gmail.com",
+        Username: 'chatbotrecommendations@gmail.com',
+        Password : "vikings@78",
+        To: `${email}`,
+        From:'chatbotrecommendations@gmail.com',
+        Subject:'chatbotrecommendations sent you a message',
+        Body:`Following is the path: <br/><br/> ${message}`,
+      }).then((message)=>alert("Mail sent successfully"));
+    }
+    
+    function setLocation() {
+  document.getElementById('hide-div').style.display = 'none';
+  appendMessage(PERSON_NAME, PERSON_IMG, "right", 1)
+  
+  
+}
+function setmethod2() {
+  document.getElementById('hide-div').style.display = 'none';
+  appendMessage(PERSON_NAME, PERSON_IMG, "right", 2)
+  
+  
+}
+function setLocation1(bsg) {
+  bsg=bsg+"HT"
+ 
+  appendMessage(PERSON_NAME, PERSON_IMG, "right",bsg )
+  
+  
+}
+ function botResponse1(rawText) {
+     $.get("/get/h", { msg: rawText }).done(function (data) {
+       
+        var msgText = data;
+        
+        
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+
+      });
+  }
+function botResponse2(rawText) {
+    
+     $.get("/get/h1", { msg: rawText }).done(function (data) {
+        
+       
+        var msgText = data;
+        console.log(msgText)
+        
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+        
+       
+
+      });
+  }
+  function botResponse3(rawText) {
+     $.get("/get/p2", { msg: rawText }).done(function (data) {
+       
+        var msgText = data;
+        
+        
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+
+      });
+  }
+
+    
+    function botResponse(rawText) {
+
+      
+      $.get("/get", { msg: rawText }).done(function (data) {
+        
+        var msgText = data;
+        if(msgText=="recommend")
+        {
+          appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+        }
+        else
+        {
+          appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+        }
+        
+        
+        
+        
+
+      });
+       
+    }
+    function botResponse4(rawText) {
+
+      
+$.get("/get/h2", { msg: rawText }).done(function (data) {
+  
+  var msgText = data;
+  console.log(msgText)
+  appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+  
+
+});
+ 
+}
+
+
+
+   
+    function get(selector, root = document) {
+      return root.querySelector(selector);
+    }
+
+    function formatDate(date) {
+      const h = "0" + date.getHours();
+      const m = "0" + date.getMinutes();
+
+      return `${h.slice(-2)}:${m.slice(-2)}`;
+    }
+
+
+
+  </script>
+
+
+</body>
+
+</html>

@@ -561,7 +561,12 @@ def mainmethod1():
                                    tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
 
         # kmeans = KMeans(n_clusters = days, init ='k-means++')
-        kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
+        try:
+            kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
+        except ValueError:
+            kmeans = KMeansConstrained(n_clusters=days, size_min=1, size_max=4, init='k-means++', n_init=10,max_iter=300,
+                                       tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
         P['cluster_label'] = kmeans.fit_predict(P[P.columns[1:3]])
         # count = P[P['cluster_label'] == 0]['Places'].count()
         # count1 = P[P['cluster_label'] == 1]['Places'].count()

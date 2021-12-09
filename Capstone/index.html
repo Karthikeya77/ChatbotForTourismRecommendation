@@ -131,16 +131,11 @@
       }
     });
     function fuv(a) {
-     alert("a")
-    
-     
-     
-     
-     
+     alert("a")   
 }
 
-function method3() {  
-  var markedCheckbox = document.getElementsByName('pl'); 
+function method3(name1) {  
+  var markedCheckbox = document.getElementsByName(name1); 
   
   z=y.split("@")
   
@@ -152,19 +147,13 @@ function method3() {
     { 
       var x=checkbox.value
       
-      for(let i=0;i<(z.length-1);i++)
-      {
-        
-        if(z[i].includes(x))
-        {
-          res12=res12+z[i]+"@"
-          break;
+    
+          res12=res12+x+"@"
+          
         }
-      }
-      
       
     }
-}  
+
 
 
 botResponse4(res12)
@@ -177,11 +166,8 @@ botResponse4(res12)
            var dat=document.getElementById(id2).value;
            window['dat1']=st
            var day=document.getElementById(id3).value; 
-           
-         
            var res=st+" "+dat+" "+day;
            id1 = id1+"1";
-           
            window['id2'] = id2+"2";
            window['id3'] = id1+"3";
            botResponse1(res);
@@ -199,7 +185,7 @@ botResponse4(res12)
            window['idm2'] = idm2+"2";  
            botResponse3(res);
      }
-                
+    name1 = "p"
 
     function appendMessage(name, img, side, text) {
       
@@ -518,13 +504,14 @@ if(typeof stri=="string"  && stri.includes(err) && name==BOT_NAME)
         for(let i=0;i<(myArr.length)-1;i++)
         { x=myArr[i]
           
-          text=text+`${myArr[i]}: <input type="checkbox" id="check${i}" name="pl" value="${myArr[i]}"><br> `
+          text=text+`${myArr[i]}: <input type="checkbox" id="check${i}" name="${name1}" value="${myArr[i]}"><br> `
           
 
         }
         y=final_string
       
-        text=text+`<br> <br><button id=${idp} class="subb" onclick="method3()">Submit</button> <br>`
+        text=text+`<br> <br><button id=${idp} class="subb" onclick="method3(\'${name1}'\)">Submit</button> <br>`
+        window['name1']=name1+"#";
         
         
             var msgHTML = `
@@ -913,7 +900,7 @@ function botResponse2(rawText) {
     function botResponse4(rawText) {
 
       
-$.get("/get/h2", { msg: rawText }).done(function (data) {
+$.get("/mainmethod1", { msg: rawText }).done(function (data) {
   
   var msgText = data;
   console.log(msgText)

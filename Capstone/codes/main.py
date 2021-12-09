@@ -30,7 +30,7 @@ stemmer = PorterStemmer()
 t1 = 0
 t2 = 0
 start_date=""
-x3=[]
+
 
 
 
@@ -158,9 +158,7 @@ def dis(a, b, c, d):
     return d
 @app.route("/get/h1")
 def main_hotel1():
-    
-   
-    
+
     x=request.args.get('msg')
    
     x=x.strip()
@@ -173,7 +171,7 @@ def main_hotel1():
     df1 = df1.reset_index(drop=True)
     
     x4=x3.copy()
-    
+
     i1 = []
     gh=""
     for i in range(len(df1)):
@@ -197,6 +195,7 @@ def main_hotel1():
         date7 = date1(date7)
         day = day + 1
     res=res+"PT"
+
     return res
 
 def get_hotel(a, b, c, x3, start_date):
@@ -420,6 +419,7 @@ def method2():
         count_cluster = []
 
         global x3
+        print(2)
         x3=[]
       
         for i in range(days):
@@ -490,7 +490,7 @@ def method1():
                
                 f=f+i[0]+"@"
         return f+"p2"
-@app.route("/get/h2")
+@app.route("/mainmethod1")
 def mainmethod1():    
         userText = request.args.get('msg')
     
@@ -543,65 +543,15 @@ def mainmethod1():
                 kmeans = KMeansConstrained(n_clusters=days, size_min=1, size_max=4, init='k-means++', n_init=10,max_iter=300,
                                        tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
             kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
-            # v1 = places_count % 4
-            # v2 = ranking(city)
-            # print(v1,v2)
-            #
-            # if len(v2) > v1:
-            #     for i in range(len(v2)):
-            #         if len(b) % 4 == 0:
-            #             days = int(len(b) / 4)
-            #             print(days)
-            #             break
-            #
-            #         elif v2[i] not in b:
-            #             b.append(v2[i])
-            #             if len(b) % 4 == 0:
-            #                 days = int(len(b) / 4)
-            #                 print(days)
-            #                 break
-
-    
-        # if len(top_places) < 4*days:
-        #     top_places.extend(city_places)
-        # a =df.loc[1]
-        # print(a)
-        # if a[1] == b:
-        # c = a[5]
-        # print(c)
-        # print(le
-        # n(df))
-        # print(P.loc[0])
-
-        # if days == 1 or len(b) < 4 * days:
-        #     a = 1
-        #     q = 4
-        #
-        # else:
-        #     a = 3
-        #     q = 4
-        # kmeans = KMeansConstrained(n_clusters=days, size_min=a, size_max=q, init='k-means++', n_init=10, max_iter=300,
-        #                            tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
-        #
-        # # kmeans = KMeans(n_clusters = days, init ='k-means++')
-        # try:
-        #     kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
-        # except ValueError:
-        #     kmeans = KMeansConstrained(n_clusters=days, size_min=1, size_max=4, init='k-means++', n_init=10,max_iter=300,
-        #                                tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
-        #     kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
 
         P['cluster_label'] = kmeans.fit_predict(P[P.columns[1:3]])
-        # count = P[P['cluster_label'] == 0]['Places'].count()
-        # count1 = P[P['cluster_label'] == 1]['Places'].count()
-        # count2 = P[P['cluster_label'] == 2]['Places'].count()
         centers = kmeans.cluster_centers_  # Coordinates of cluster centers.
         # print(centers)
         labels = kmeans.predict(P[P.columns[1:3]])  # Labels of each point
         # print(labels)
         # P.head(10)
         global x3
-       
+        print(1)
         x3 = []
         count_cluster = []
         for i in range(days):

@@ -131,7 +131,6 @@ def get_path2(m, n, date, day):
         mn = list6[i][0]
         if(i>0):
             mn=list6[i][1][0]
-        
 
         y.append((f"{i + 1 : <10}{mn : ^25}"))
         y.append("@")
@@ -251,8 +250,6 @@ def get_hotel(a, b, c, x3, start_date):
     #main_hotel1(userText,x3,start_date)
     
     return res12.join(list8)
-    
-
 
 def mean_places1(userText,list2, x3, city, start_date):
     lat = 0
@@ -507,37 +504,63 @@ def mainmethod1():
         b = []
         for i in range(len(places)):
             b.append(places[i])
-        if places_count % 4 == 0:
-            days = int(places_count / 4)
-        else:
-            v1 = places_count % 4
-            v2 = ranking(city)
-            
-            if len(v2) > v1:
-                for i in range(len(v2)):
-                    if len(b) % 4 == 0:
-                        days = int(len(b) / 4)
-                        break
-
-                    elif v2[i] not in b:
-                        b.append(v2[i])
-                        if len(b) % 4 == 0:
-                            days = int(len(b) / 4)
-                            break
-
-       
 
         df = pd.read_csv(r"C:\Users\karth\OneDrive\Desktop\Capstone\codes\Capstone.csv")
         df1 = df[df.City == city]
         df2 = df1[df1.Places.isin(b)]
         df2 = df2.reset_index(drop=True)
-       
 
         df3 = df2.reindex(columns=['Places', 'Latitude', 'Longitude'])
         places1 = df3.values.tolist()
         df2 = df1[df1.Places.isin(b)]
         df2 = df2.reset_index(drop=True)
         P = df2.reindex(columns=['Places', 'Latitude', 'Longitude'])
+
+        if places_count % 4 == 0:
+            days = int(places_count / 4)
+            if places_count == 4:
+                kmeans = KMeansConstrained(n_clusters=days, size_min=4, size_max=4, init='k-means++', n_init=10,max_iter=300,
+                                           tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            else:
+                kmeans = KMeansConstrained(n_clusters=days, size_min=3, size_max=5, init='k-means++', n_init=10,max_iter=300,
+                                       tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
+
+        else:
+            days = int(places_count/4)+1
+            if places_count == 1:
+                kmeans = KMeansConstrained(n_clusters=days, size_min=1, size_max=1, init='k-means++', n_init=10,max_iter=300,
+                                           tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            elif places_count == 2:
+                kmeans = KMeansConstrained(n_clusters=days, size_min=2, size_max=2, init='k-means++', n_init=10,
+                                           max_iter=300,
+                                           tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            elif places_count == 3:
+                kmeans = KMeansConstrained(n_clusters=days, size_min=3, size_max=3, init='k-means++', n_init=10,
+                                           max_iter=300,
+                                           tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            else:
+                kmeans = KMeansConstrained(n_clusters=days, size_min=1, size_max=4, init='k-means++', n_init=10,max_iter=300,
+                                       tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+            kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
+            # v1 = places_count % 4
+            # v2 = ranking(city)
+            # print(v1,v2)
+            #
+            # if len(v2) > v1:
+            #     for i in range(len(v2)):
+            #         if len(b) % 4 == 0:
+            #             days = int(len(b) / 4)
+            #             print(days)
+            #             break
+            #
+            #         elif v2[i] not in b:
+            #             b.append(v2[i])
+            #             if len(b) % 4 == 0:
+            #                 days = int(len(b) / 4)
+            #                 print(days)
+            #                 break
+
     
         # if len(top_places) < 4*days:
         #     top_places.extend(city_places)
@@ -550,18 +573,24 @@ def mainmethod1():
         # n(df))
         # print(P.loc[0])
 
-        if days == 1 or len(b) < 4 * days:
-            a = 1
-            q = 4
+        # if days == 1 or len(b) < 4 * days:
+        #     a = 1
+        #     q = 4
+        #
+        # else:
+        #     a = 3
+        #     q = 4
+        # kmeans = KMeansConstrained(n_clusters=days, size_min=a, size_max=q, init='k-means++', n_init=10, max_iter=300,
+        #                            tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+        #
+        # # kmeans = KMeans(n_clusters = days, init ='k-means++')
+        # try:
+        #     kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
+        # except ValueError:
+        #     kmeans = KMeansConstrained(n_clusters=days, size_min=1, size_max=4, init='k-means++', n_init=10,max_iter=300,
+        #                                tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
+        #     kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
 
-        else:
-            a = 3
-            q = 4
-        kmeans = KMeansConstrained(n_clusters=days, size_min=a, size_max=q, init='k-means++', n_init=10, max_iter=300,
-                                   tol=0.0001, verbose=False, random_state=None, copy_x=True, n_jobs=1)
-
-        # kmeans = KMeans(n_clusters = days, init ='k-means++')
-        kmeans.fit(P[P.columns[1:3]])  # Compute k-means clustering.
         P['cluster_label'] = kmeans.fit_predict(P[P.columns[1:3]])
         # count = P[P['cluster_label'] == 0]['Places'].count()
         # count1 = P[P['cluster_label'] == 1]['Places'].count()

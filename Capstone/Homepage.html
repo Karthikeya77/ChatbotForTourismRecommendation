@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+		<link rel= "stylesheet" href="{{ url_for('static',filename='style.css') }}">
 		<title>Homepage</title>
 	</head>
 	
@@ -15,56 +15,69 @@
 				<li><a id="faq-click" href="#faq">FAQs</a></li>
 				<li><a id="profile-click"><span id="myText"></span></a>
 					<ul>
-						<li><a href="profile.html">Profile</a></li>
+						<li><a href="#" onclick="showdiv()">Profile</a></li>
 						<li><a href="#" onclick="logout()">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
 		</nav>
+		<div id="content">
 			<div id="about">
 				<div class="abouttxt">
-					<br><p class="welcome">Welcome!!!<p><br>
-						<p>We are here to help you out to find the best path for<br>travelling through tourism places in several cities in South India</p><br>
-						<p>We provide you with two ways of recommendations</p>
-						<p>1 . User will provide places</p>
-						<p>2. Chatbot will suggest places to User</p><br>
-						<p>In first option user will give the input as :<br>The city he wants travel<br>Starting date of travel<br>Places to travel</p><br>
-						<p>In the second case user will just give input as:<br>The city he wants to travel<br>Starting date of travel<br>No of days he want to travel</p>
+						<br><h1 style="color:red">Welcome!!!</h1><br>
+						<p>We are here to help you out to find the best path for<br>travelling through tourism places in several cities in South India</p><br><br>
+						<p style="font-weight:bold">We provide you with two ways of recommendations</p>
+						<p>1. User will provide places</p>
+						<p>2. Chatbot will suggest places to User</p><br><br>
+						<p style="font-weight:bold">In first option user will give the input as :</p><p style="color:green">The city he wants travel, Starting date, Places.</p><br>
+						<p style="font-weight:bold">In the second case user will just give input as:</p><p style="color:green">The city he wants to travel, Starting date, No of days.</p><br><br>
 				</div>
-				<div class="aboutpic"><img src="{{url_for('static', filename='about.jpg')}}" ></div>
+				<div class="aboutpic"><img style="border-radius:100px" src="{{url_for('static', filename='about.jpg')}}" ></div>
 			</div>
 			<div id="gotochatbot">
-				<div class="chatbotpic"><img src="{{url_for('static', filename='chatbot.png')}}" ></div>
+				<div class="chatbotpic"><img style="border-radius:100px" src="{{url_for('static', filename='chatbot.png')}}" ></div>
 				<div class="chatbottxt">
 					<br><br><br><br><br><br><br><br>
-					<p class="txtchattxt">Let's check a simple tourism recommendation for your favourite place...</p><br>
-					<p class="click">Click Below to redirect to chatbot Page</p><br>
+					<p style="font-weight:bold;font-size:20px;">Let's check a simple tourism recommendation...</p><br>
+					<p style="font-weight:bold;font-size:22px;color:red">Click Below to redirect to chatbot Page</p><br>
 					<button class="gotochatbotbtn" onclick="chatbot()">Go to Chatbot</button>
 				</div>
 			</div>
 			<div id="contactus">
 				<div class="contacttxt">
 					<br><br>
-					<p class="heads">Contact Nos</p><br>
+					<h1 style="color:red">Contact Nos</h1><br>
 					<p>Jitendra - 8008480034</p>
 					<p>Karthikeya - 9010891970</p>
 					<p>Manohar - 9901945020</p>
 					<p>Manimadhav - 9381824785</p><br>
-					<p class="heads">Email IDs</p><br>
+					<h1 style="color:red">Email IDs</h1><br>
 					<p>jitendragali8@gmail.com</p>
 					<p>manimadhav2@gmail.com</p>
 					<p>karthikeyagundepalli@gmail.com</p>
 					<p>manoharui67@gmail.com</p>
 				</div>
-				<div class="contactpic"><img src="{{url_for('static', filename='contact.jpg')}}" ></div>
+				<div class="contactpic"><img style="border-radius:100px" src="{{url_for('static', filename='contact.jpg')}}" ></div>
 			</div>
-			<div class="faq">
-				<br><br>	
-				<p>1</p><br>
-				<p>2</p><br>
-				<p>3</p><br>
-				<p>4</p><br>
-				<p>5</p>
+			<div class="faq" id="faq">
+				<h3 style="color:red">FAQs Section</h3><br>	
+				<p>How do we activate the chatbot recommendation? </p>
+				<p style="color:green;font-weight:bold">By giving input as Recommend</p><br>
+				<p>Does this chatbot work all the time? </p>
+				<p style="color:green;font-weight:bold">Yes, it works 24/7 </p><br>
+				<p>How do I remember the path that is given? </p>
+				<p style="color:green;font-weight:bold">You can get it to your mailId </p><br>
+				<p>Will this chatbot work for all cities in India? </p>
+				<p style="color:green;font-weight:bold">No, this is restricted for South-Indian Cities </p><br>
+				<p>Does your chatbot take voice input and give voice output? </p>
+				<p style="color:green;font-weight:bold">No, it can just take voice input </p><br><br><br>
+			</div>
+			</div>
+			<div class="profile" id="profile">
+				<h1>User Details</h1><br><br>
+				<p>Name</p><br><p id="name"></p><br><br>
+				<p>Email</p><br><p id="email"></p><br><br>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button class="close" onclick="hidediv()">Close</div>
 			</div>
 	</body>
 	<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
@@ -89,12 +102,22 @@ ref.once("value", function(snapshot){
 	snapshot.forEach(function(element){
 		if (element.val()['email'] === n){
 			document.getElementById("myText").innerHTML = element.val()['Name']
+			document.getElementById("name").innerHTML = element.val()['Name']
+			document.getElementById("email").innerHTML = element.val()['email']
 			localStorage.setItem('name1',element.val()['Name']);
-
 		}
 	});
 })
-
+var divs=document.getElementById("profile")
+var cont=document.getElementById("content")
+function showdiv(){
+	divs.style.display = "block"
+	cont.style.opacity="0.3"
+}
+function hidediv(){
+	divs.style.display = "none"
+	cont.style.opacity="1"
+}
 function logout(){
     firebase.auth().signOut()
 }

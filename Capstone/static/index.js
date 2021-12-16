@@ -2,14 +2,14 @@ var b = document.getElementById("btn");
 var l = document.getElementById("login");
 var r = document.getElementById("register");
 function signup(){
-	b.style.left = "110px";	
-	l.style.left= "-450px";
-	r.style.left= "50px";
+    b.style.left = "110px"; 
+    l.style.left= "-450px";
+    r.style.left= "50px";
 }
 function signin(){
-	b.style.left = "0px";	
-	l.style.left= "50px";
-	r.style.left= "450px";
+    b.style.left = "0px";   
+    l.style.left= "50px";
+    r.style.left= "450px";
 }
 function myFunction() {
     var x = document.getElementById("passwordl");
@@ -48,12 +48,14 @@ function Register(){
     const email = document.getElementById("emailr").value
     var firebaseRef = firebase.database().ref('users/'+name)
     firebaseRef.set({
-		Name : name,
-		email : email
-	});
+        Name : name,
+        email : email
+    });
     localStorage.setItem('email1',email);
+    
     const password = document.getElementById("passwordr").value
     const confirmpassword = document.getElementById("confirmpassword").value
+    if (name == ""){document.getElementById("error2").innerHTML = "Name cannot be empty"; return;}
     if (password != confirmpassword) {document.getElementById("error2").innerHTML = "Password and ConfirmPassword are not same"; return;}
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .catch((error) => {

@@ -16,7 +16,6 @@ import torch
 import torch.nn as nn
 import json
 import random
-from geopy import distance
 
 import nltk
 import datetime
@@ -94,15 +93,17 @@ df = pd.read_csv(r"C:\Users\karth\OneDrive\Desktop\Capstone\codes\Capstone.csv")
 # x = date.split('-')
 # y = x[0]+x[1]+x[2]
 
-'''
-def get_path2(m, n):
-    # print("m",m)
-    # print("n",n)
+
+def get_path2(m, n, date, day):
     a = m[0]
     b = m[1]
+    list6=[]
+    
+    #print(n)
+    list4 = []
     g = {}
-    g2 = {}
-    y = []
+    g2={}
+    y=[]
     l = len(n)
     for i in range(l):
         f = dis(n[i][1], n[i][2], a, b)
@@ -111,10 +112,8 @@ def get_path2(m, n):
     sorted_d = dict(sorted(a1.items(), key=operator.itemgetter(0)))
     # print(sorted_d)
     list3 = [[k, v] for k, v in sorted_d.items()]
-    # print("list3 before deletion",list3)
     f1=list3[0][1]
     del list3[0]
-    # print("list3 after deletion",list3)
     a3=f1[1]
     b3=f1[2]
     for i in range(len(list3)):
@@ -125,6 +124,9 @@ def get_path2(m, n):
     sorted_d1 = dict(sorted(a4.items(), key=operator.itemgetter(0)))
     list6 = [v for k, v in sorted_d1.items()]
     list6.insert(0,f1)
+    # print(list6)
+    date1 = date
+    #print("Recommended path for Day {}:".format(day))
     for i in range(len(list6)):
         mn = list6[i][0]
         # print(mn)
@@ -135,42 +137,26 @@ def get_path2(m, n):
         y.append("@")
     res1=""
     res1=res1.join(y)
-    print("res1",res1)
+    
     
     return res1
-'''
-def get_path2(m, n):
-    k = [['',m[0],m[1]]]
-    # print("m",m)
-    for i in range(len(n) - 1):
-        short = 99999
-        f1 = k[-1]
-        f2 = []
-        for j in range(len(n)):
-            # print("n",n)
-            a = dis(f1[1], f1[2], n[j][1], n[j][2])
-            if (a < short):
-                short = a
-                f2 = n[j].copy()
-        n.remove(f2)
-        k.append(f2)
-    k.append(n[0])
-    # print("k",k)
-    path = ""
-    for i in range(1, len(k)):
-        path += str(i)+"    "+k[i][0]+"     "+"@"
-        # path += "   "
-        # path += k[i][0]
-        # path += "@"
-    # print("path",path)
-    return path
-
 
 def dis(a, b, c, d):
-    place1 = (a, b)
-    place2 = (c, d)
-    k = round(distance.distance(place1, place2).km, 2)
-    return k
+    # approximate radius of earth in km
+    R = 6373.0
+
+    lat1 = radians(a)
+    lon1 = radians(b)
+    lat2 = radians(c)
+    lon2 = radians(d)
+
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    d = R * c
+    return d
 @app.route("/get/h1")
 def main_hotel1():
 
@@ -203,7 +189,7 @@ def main_hotel1():
     # print(x3)
     
     for i in range(len(x3)):
-        op=get_path2(i1, x3[i])
+        op=get_path2(i1, x3[i], date7, day)
         res=res+op+"$"
         
         date7 = date1(date7)
@@ -215,8 +201,6 @@ def main_hotel1():
 def get_hotel(a, b, c, x3, start_date):
     g = {}
     h = {}
-    print("a",a)
-    print("b",b)
     list4 = []
     list6 = []
     list7 = []
@@ -234,7 +218,7 @@ def get_hotel(a, b, c, x3, start_date):
     sorted_d = dict(sorted(a1.items(), key=operator.itemgetter(1)))
     # print(sorted_d)
     list3 = [[k, v] for k, v in sorted_d.items()]
-    print(list3)
+    # print(list3)
     if len(list3) >= 10:
         for i in range(10):
             list4.append(list3[i])
@@ -285,14 +269,9 @@ def mean_places(list1, city):
     for i in range(len(list1)):
         lat = lat + (list1[i][1])
         lon = lon + (list1[i][2])
-        print("lon of",i,lon)
-    print("sumlat",lat)
-    print("sumlon",lon)
     lat_mean = lat / len(list1)
     lon_mean = lon / len(list1)
     list2.append([lat_mean, lon_mean])
-    print("Latmean",lat_mean)
-    print("Lonmean",lon_mean)
     return list2
 
 length = len(df)

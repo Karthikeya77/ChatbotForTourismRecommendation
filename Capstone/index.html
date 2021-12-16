@@ -45,11 +45,10 @@
           </div>
 
           <div class="msg-text">
-            Hi! Welcome to Tourism Recommendation System,I am here to help you. 😄
-          </div>
-          <div class="msg-text">
-            you can ask me anything related to Tourism in South India ,I will try my best to answer
-          </div>
+            Hi! Welcome to Tourism Recommendation System<br>I am here to help you 😄<br>
+			<br>Type the below command to start recommendation<br><br>
+			<p style="font-weight:bold;color:red;font-style:italic;font-size:20px">&emsp;&emsp;&emsp;&emsp;&emsp;"Recommend"</p>
+		  </div>
         </div>
       </div>
 
@@ -131,10 +130,16 @@
       }
     });
     function fuv(a) {
-     alert("a")   
+     alert("a")
+    
+     
+     
+     
+     
 }
 
 function method3(name1) {  
+  
   var markedCheckbox = document.getElementsByName(name1); 
   
   z=y.split("@")
@@ -146,13 +151,22 @@ function method3(name1) {
     if (checkbox.checked) 
     { 
       var x=checkbox.value
+      console.log(x)
       
-    
-          res12=res12+x+"@"
+      for(let i=0;i<(z.length-1);i++)
+      {
+
+        if(z[i].includes(x))
+        {
+          res12=res12+z[i]+"@"
+          break;
           
         }
+        
       
     }
+    }
+  }
 
 
 
@@ -166,8 +180,11 @@ botResponse4(res12)
            var dat=document.getElementById(id2).value;
            window['dat1']=st
            var day=document.getElementById(id3).value; 
+           
+         
            var res=st+" "+dat+" "+day;
            id1 = id1+"1";
+           
            window['id2'] = id2+"2";
            window['id3'] = id1+"3";
            botResponse1(res);
@@ -185,7 +202,7 @@ botResponse4(res12)
            window['idm2'] = idm2+"2";  
            botResponse3(res);
      }
-    name1 = "p"
+     name1="p"            
 
     function appendMessage(name, img, side, text) {
       
@@ -197,7 +214,7 @@ botResponse4(res12)
        var path1="PT"
        var err="CityErr"
 	   var err1="DayINV"
-       var answ="Res"
+       var answ="#Res"
        var side=side
        var img=img
        var p2="p2"
@@ -503,15 +520,18 @@ if(typeof stri=="string"  && stri.includes(err) && name==BOT_NAME)
         console.log(myArr)
         for(let i=0;i<(myArr.length)-1;i++)
         { x=myArr[i]
+         
           
           text=text+`${myArr[i]}: <input type="checkbox" id="check${i}" name="${name1}" value="${myArr[i]}"><br> `
           
+          
 
         }
+        
         y=final_string
       
-        text=text+`<br> <br><button id=${idp} class="subb" onclick="method3(\'${name1}'\)">Submit</button> <br>`
-        window['name1']=name1+"#";
+        text=text+`<br> <br><button id=${idp} class="subb" onclick="method3(\'${name1}\')">Submit</button> <br>`
+        window['name1'] = name1+"#";
         
         
             var msgHTML = `
@@ -557,40 +577,37 @@ if(typeof stri=="string"  && stri.includes(err) && name==BOT_NAME)
         if (typeof stri=="string"  && stri.includes(str12) && name==BOT_NAME) 
 {
      var myarr=stri.split("HT")
-
-  
+     var text12=``
+     for(let i=0;i<(myarr.length)-1;i++)
+     {
+ 
+       var text12=text12+`<input type="Button" id="but" onclick="setLocation1(\'${myarr[i]}\')" value="${myarr[i]}"></input><br><br>`
+     }
   
   var msgHTML = `
 <div class="msg ${side}-msg">
   
   <div class="msg-bubble">
-    <div>Choose One hotel Out of  five Hotels</div><br><br>
+    <div>Choose One hotel Out of  Hotels mentioned below</div><br><br>
     <div class="hide-onet">
-    <input type="Button" id="but" onclick="setLocation1(\'${myarr[0]}\')" value="${myarr[0]}"></input><br><br>
-    <input type="Button" id="but" onclick="setLocation1(\'${myarr[1]}\')" value="${myarr[1]}"></input><br><br>
-    <input type="Button" id="but" onclick="setLocation1(\'${myarr[2]}\')" value="${myarr[2]}"></input><br><br>
-    <input type="Button" id="but" onclick="setLocation1(\'${myarr[3]}\')" value="${myarr[3]}"></input><br><br>
-    <input type="Button" id="but" onclick="setLocation1(\'${myarr[4]}\')" value="${myarr[4]}"></input><br><br>
     
-    </div>
-  
-  </div>
-</div>
  
 `
 ;
+var msgHTML=msgHTML+text12+`</div>`+`</div>`+`</div>`
 
       msgerChat.insertAdjacentHTML("beforeend", msgHTML);
       msgerChat.scrollTop += 500;
+
 	
         } 
         else if(typeof stri=="string"  && stri.includes(str12) && name==PERSON_NAME) {
-  
+  var d=stri.replace("HT","")
   const msgHTML = `
 <div class="msg ${side}-msg">
  
  <div class="msg-bubble">
-   <div>${text}</div>
+   <div>${d}</div>
    
    
  
@@ -612,13 +629,13 @@ if(typeof stri=="string"  && stri.includes(err) && name==BOT_NAME)
   
 
 if(typeof stri=="string"  && stri.includes(answ) && name==BOT_NAME)
-      {  if(stri.includes("No"))
+      {  if(stri.includes("#No"))
           {
-            var t=stri.replace("NoRes","");
+            var t=stri.replace("#NoRes","");
           }  
         else
         {
-          var t=stri.replace("Res","");
+          var t=stri.replace("#Res","");
         }
             var msgHTML = `
 	<div class="msg ${side}-msg">
@@ -900,7 +917,7 @@ function botResponse2(rawText) {
     function botResponse4(rawText) {
 
       
-$.get("/mainmethod1", { msg: rawText }).done(function (data) {
+$.get("/get/h2", { msg: rawText }).done(function (data) {
   
   var msgText = data;
   console.log(msgText)
